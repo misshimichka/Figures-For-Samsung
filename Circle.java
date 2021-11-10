@@ -1,28 +1,24 @@
 package com.company;
 
+import java.lang.Math.*;
+import java.util.Random;
+import java.awt.Color;
+
 public class Circle {
-    double x;
-    double y;
+    Point center;
     double radius;
-    String c;
 
-    Circle(Point center) {
-        x = center.x;
-        y = center.y;
-        radius = 5;
-    }
-
-    void move(double dx, double dy) {
-        x += dx;
-        y += dy;
+    Circle(Point c, double r) {
+        center = c;
+        radius = r;
     }
 
     void getSurface() {
-        double s = radius * radius * 3.14;
+        double s = radius * radius * Math.PI;
     }
 
-    void petPerimeter() {
-        double p = 2 * radius * 3.14;
+    void getPerimeter() {
+        double p = 2 * radius * Math.PI;
     }
 
     void getDiameter() {
@@ -31,6 +27,16 @@ public class Circle {
 
     @Override
     public String toString() {
-        return "Point{x=" + x + "; y=" + y + "}, color=" + c;
+        return "Point{x=" + center.x + "; y=" + center.y + "}, color=" + setColor();
+    }
+
+    void move(double dx, double dy) {
+        center.x += dx;
+        center.y += dy;
+    }
+
+    Color setColor() {
+        Random r = new Random();
+        return new Color(r.nextInt(256), r.nextInt(256), r.nextInt(256));
     }
 }

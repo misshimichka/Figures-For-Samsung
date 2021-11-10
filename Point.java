@@ -3,50 +3,41 @@ package com.company;
 public class Point {
     double x;
     double y;
-    double degrees;
-    double l;
 
-    Point(double my_x, double my_y) {
-        x = my_x;
-        y = my_y;
+    Point(double myX, double myY) {
+        x = myX;
+        y = myY;
     }
 
     double length() {
-        l = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
-        return l;
-    }
-
-    double angle() {
-        double k = Math.sqrt(Math.pow(y, 2));
-        double sinus = k / l;
-        double arcsin = Math.asin(sinus);
-        degrees = Math.toDegrees(arcsin);
-        return degrees;
+        return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
     }
 
     void add(Point anotherPoint) {
-        x = x + anotherPoint.x;
-        y = y + anotherPoint.y;
+        x += anotherPoint.x;
+        y += anotherPoint.y;
     }
 
     double distanceXTo(Point anotherPoint) {
-        double dist_x = x - anotherPoint.x;
-        return dist_x;
+        return x - anotherPoint.x;
     }
 
     double distanceYTo(Point anotherPoint) {
-        double dist_y = y - anotherPoint.y;
-        return dist_y;
+        return y - anotherPoint.y;
     }
 
     double distanceTo(Point anotherPoint) {
-        double dist = Math.sqrt((x - anotherPoint.x) * (x - anotherPoint.x) + (y - anotherPoint.y) * (y - anotherPoint.y));
-        return dist;
+        return Math.sqrt((x - anotherPoint.x) * (x - anotherPoint.x) + (y - anotherPoint.y) * (y - anotherPoint.y));
     }
 
     @Override
     public String toString() {
         return "Point{x=" + x + "; y=" + y + "}";
+    }
+
+    void move(double dx, double dy) {
+        x += dx;
+        y += dy;
     }
 
 }

@@ -1,41 +1,39 @@
 package com.company;
 
+import java.awt.*;
+import java.util.Random;
+
 public class Rectangle {
-    double x;
-    double y;
+    Point point;
     double edgeX;
     double edgeY;
-    String c;
 
-    Rectangle(Point v, double my_x, double my_y) {
-        edgeX = my_x;
-        edgeY = my_y;
-        x = v.x;
-        y = v.y;
-    }
-
-    void move(double dx, double dy) {
-        edgeX += dx;
-        edgeY += dy;
-    }
-
-    String setColor(String color) {
-        c = color;
-        return c;
+    Rectangle(Point v, double myX, double myY) {
+        edgeX = myX;
+        edgeY = myY;
+        point = v;
     }
 
     double getSurface() {
-        double s = edgeX * edgeY;
-        return s;
+        return edgeX * edgeY;
     }
 
-    double petPerimeter() {
-        double p = (edgeX + edgeY) * 2;
-        return p;
+    double getPerimeter() {
+        return (edgeX + edgeY) * 2;
     }
 
     @Override
     public String toString() {
-        return "Point{x=" + x + "; y=" + y + "}";
+        return "Point{x=" + point.x + "; y=" + point.y + "}";
+    }
+
+    void move(double dx, double dy) {
+        point.x += dx;
+        point.y += dy;
+    }
+
+    Color setColor() {
+        Random r = new Random();
+        return new Color(r.nextInt(256), r.nextInt(256), r.nextInt(256));
     }
 }

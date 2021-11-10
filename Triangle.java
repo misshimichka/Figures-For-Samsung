@@ -1,47 +1,31 @@
 package com.company;
 
-import java.util.Arrays;
-import java.util.Scanner;
-import java.lang.Math.*;
+import java.awt.*;
+import java.util.Random;
 
 public class Triangle {
-    double x1;
-    double y1;
-    double x2;
-    double y2;
-    double x3;
-    double y3;
+    Point point1;
+    Point point2;
+    Point point3;
     double a;
     double b;
     double c;
 
     Triangle(Point v1, Point v2, Point v3) {
-        x1 = v1.x;
-        y1 = v1.y;
-        x2 = v1.x;
-        y2 = v1.y;
-        x3 = v1.x;
-        y3 = v1.y;
+        point1 = v1;
+        point2 = v2;
+        point3 = v3;
     }
 
-    void move(double dx, double dy) {
-        x1 += dx;
-        y1 += dy;
-        x2 += dx;
-        y2 += dy;
-        x3 += dx;
-        y3 += dy;
+    double getSurface() {
+        return ((point1.x - point3.x) * (point2.y - point3.y) - (point2.x - point3.x) * (point1.y - point3.y)) / 2;
     }
 
-    void getSurface() {
-        double s = ((x1 - x3) * (y2 - y3) - (x2 - x3) * (y1 - y3)) / 2;
-    }
-
-    void petPerimeter() {
-        a = Math.sqrt((x1 - x2) * (x1 - x2) + (y2 - y1) * (y2 - y1));
-        b = Math.sqrt((x2 - x3) * (x2 - x3) + (y3 - y2) * (y3 - y2));
-        c = Math.sqrt((x3 - x1) * (x3 - x1) + (y1 - y3) * (y1 - y3));
-        double p = (a + b + c) / 2;
+    double petPerimeter() {
+        a = Math.sqrt((point1.x - point2.x) * (point1.x - point2.x) + (point1.y - point2.y) * (point1.y - point2.y));
+        b = Math.sqrt((point2.x - point3.x) * (point2.x - point3.x) + (point3.y - point2.y) * (point3.y - point2.y));
+        c = Math.sqrt((point1.x - point3.x) * (point1.x - point3.x) + (point1.y - point3.y) * (point1.y - point3.y));
+        return (a + b + c) / 2;
     }
 
     boolean isIsoceles() {
@@ -60,30 +44,29 @@ public class Triangle {
     }
 
     boolean isRectangle() {
-        if (a * a + b * b == c * c) {
-            return true;
-        }
-        else {
-            return false;
-        }
+        return a * a + b * b == c * c;
     }
 
     boolean estEquilateral() {
-        if (a == b) {
-            if (b == c) {
-                return true;
-            }
-            else {
-                return false;
-            }
-        }
-        else {
-            return false;
-        }
+        return a == b && b == c;
     }
 
     @Override
     public String toString() {
-        return "Point{(x=" + x1 + "; y=" + y1 + "), (x=" + x2 + "; y=" + y2 + "), (x=" + x3 + "; y=" + y3 + ")}";
+        return "Point{(" + point1 + "), (" + point2 + "), (" + point3 + ")}";
+    }
+
+    void move(double dx, double dy) {
+        point1.x += dx;
+        point1.y += dy;
+        point2.x += dx;
+        point2.y += dy;
+        point3.x += dx;
+        point3.y += dy;
+    }
+
+    Color setColor() {
+        Random r = new Random();
+        return new Color(r.nextInt(256), r.nextInt(256), r.nextInt(256));
     }
 }
